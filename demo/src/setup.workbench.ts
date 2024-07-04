@@ -5,7 +5,7 @@ import { BrowserStorageService } from '@codingame/monaco-vscode-storage-service-
 import { ExtensionHostKind } from '@codingame/monaco-vscode-extensions-service-override'
 import { registerExtension } from 'vscode/extensions'
 import './features/customView.workbench'
-import { commonServices, constructOptions, envOptions, remoteAuthority, userDataProvider } from './setup.common'
+import { commonServices, constructOptions, envOptions } from './setup.common'
 
 const container = document.createElement('div')
 container.style.height = '100vh'
@@ -46,7 +46,6 @@ document.querySelector('#toggleAuxiliary')!.addEventListener('click', async () =
 })
 
 export async function clearStorage (): Promise<void> {
-  await userDataProvider.reset()
   await (await getService(IStorageService) as BrowserStorageService).clear()
 }
 
@@ -58,7 +57,3 @@ await registerExtension({
     vscode: '*'
   }
 }, ExtensionHostKind.LocalProcess).setAsDefaultApi()
-
-export {
-  remoteAuthority
-}

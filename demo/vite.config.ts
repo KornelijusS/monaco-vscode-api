@@ -5,10 +5,23 @@ import path from 'path'
 import pkg from './package.json' assert { type: 'json' }
 
 const localDependencies = Object.entries(pkg.dependencies).filter(([, version]) => version.startsWith('file:../')).map(([name]) => name)
+
+const filesToRemove = ['diagnosticMessages', 'demo-', 'debug-and-run', 'create-a-js-file', 'install-node-js', 'learn-more']
 export default defineConfig({
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (filesToRemove.some(file => assetInfo.name?.includes(file))) {
+            return 'todelete/[name]-[hash][extname]'
+          }
+          return 'assets/[name]-[hash][extname]'
+        }
+      }
+    }
   },
+  base: './',
   plugins: [
     {
       // For the *-language-features extensions which use SharedArrayBuffer

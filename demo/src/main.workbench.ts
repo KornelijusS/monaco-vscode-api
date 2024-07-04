@@ -1,11 +1,7 @@
 import { IEditorService, StandaloneServices, createInstance } from 'vscode/services'
-import { clearStorage, remoteAuthority } from './setup.workbench'
+import { clearStorage } from './setup.workbench'
 import { CustomEditorInput } from './features/customView.workbench'
 import './main.common'
-
-if (remoteAuthority != null) {
-  import('./features/remoteExtension')
-}
 
 document.querySelector('#customEditorPanel')!.addEventListener('click', async () => {
   const input = await createInstance(CustomEditorInput, undefined)
