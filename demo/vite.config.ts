@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
+import vsixPlugin from '@codingame/monaco-vscode-rollup-vsix-plugin'
 import * as fs from 'fs'
 import path from 'path'
 import pkg from './package.json' assert { type: 'json' }
@@ -7,6 +8,8 @@ import pkg from './package.json' assert { type: 'json' }
 const localDependencies = Object.entries(pkg.dependencies).filter(([, version]) => version.startsWith('file:../')).map(([name]) => name)
 
 const filesToRemove = ['diagnosticMessages', 'demo-', 'debug-and-run', 'create-a-js-file', 'install-node-js', 'learn-more']
+const filesToChange = ['webWorkerExtensionHostIframe', 'extensionHost']
+// @ts-ignore
 export default defineConfig({
   build: {
     target: 'esnext',
@@ -15,14 +18,24 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           if (filesToRemove.some(file => assetInfo.name?.includes(file))) {
             return 'todelete/[name]-[hash][extname]'
+          } else if (filesToChange.some(file => assetInfo.name?.includes(file))) {
+            return 'assets/[name][extname]'
           }
           return 'assets/[name]-[hash][extname]'
         }
       }
     }
   },
+  worker: {
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name][extname]'
+      }
+    }
+  },
   base: './',
   plugins: [
+    vsixPlugin(),
     {
       // For the *-language-features extensions which use SharedArrayBuffer
       name: 'configure-response-headers',

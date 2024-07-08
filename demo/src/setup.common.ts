@@ -46,6 +46,8 @@ import defaultKeybindings from './user/keybindings.json?raw'
 import defaultConfiguration from './user/configuration.json?raw'
 import { workerConfig } from './tools/extHostWorker'
 import 'vscode/localExtensionHost'
+import './features/vscode-typescript-web-0.1.2.vsix'
+import './features/volar-2.0.26.vsix'
 
 const url = new URL(document.location.href)
 const params = url.searchParams

@@ -11,20 +11,16 @@
     "editor.semanticHighlighting.enabled": true,
     "editor.bracketPairColorization.enabled": false,
     "editor.fontSize": 12,
-    "accessibility.signals.lineHasError": {
-        "sound": "on"
-    },
-    "accessibility.signals.onDebugBreak": {
-        "sound": "on"
-    },
     "files.autoSave": "off",
-    "debug.toolBarLocation": "docked",
     "editor.experimental.asyncTokenization": true,
-    "terminal.integrated.tabs.title": "${sequence}",
-    "typescript.tsserver.log": "normal",
     "workbench.sideBar.location": "left",
-    "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": false,
-    "typescript.experimental.tsserver.web.typeAcquisition.enabled": true,
-    "typescript.web.projectWideIntellisense.enabled": true,
-    "typescript.disableAutomaticTypeAcquisition": true
+    "vue.autoInsert.dotValue": true,
+    "vue.inlayHints.missingProps": true,
+    "vue.inlayHints.vBindShorthand": true,
+    "vue.server.hybridMode": "auto",
+    "vue.complete.casing.props": "autoCamel",
+    "emmet.includeLanguages": {
+        "vue-html": "html",
+        "vue": "html"
+    }
 }
